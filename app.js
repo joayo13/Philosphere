@@ -1,8 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
+const session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('./passport-config');
 require('dotenv').config()
 
 var indexRouter = require('./routes/index');
@@ -21,7 +23,15 @@ async function main() {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(session({
+  secret: process.env.SESSION_SECRET, // Change this to a more secure secret
+  resave: false,
+  saveUninitialized: false,
+}));
 
+// Set up Passport.js middleware
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
