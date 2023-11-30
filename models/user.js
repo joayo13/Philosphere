@@ -25,9 +25,9 @@ const UserSchema = new Schema({
     required: true,
     minlength: 8,
   },
-  quotes: [{
+  stories: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Quote',
+    ref: 'Story',
   }],
 });
 

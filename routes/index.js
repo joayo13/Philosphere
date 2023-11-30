@@ -28,15 +28,15 @@ router.post('/signin', validateSignin, asyncHandler(async (req, res, next) => {
   }
 
   passport.authenticate('local', {
-    successRedirect: '/signin-success',
+    successRedirect: '/library',
     failureRedirect: '/signin',
     failureFlash: true,
   })(req, res, next);
 }));
 
 // Define a route for the signin success page
-router.get('/signin-success', (req, res) => {
-  res.send('Signin successful!');
+router.get('/library', (req, res) => {
+  res.send('Library');
 });
 router.get('/signup', (req, res) => {
   res.render('signup');
@@ -69,17 +69,14 @@ router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
     console.log('User added to database');
 
     // Redirect to a success page or handle signup logic
-    res.redirect('/signup-success');
+    res.redirect('/signin', {
+      message: "Account Created, Sign In to Continue"
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error creating user');
   }
 }));
-
-// Define a route for the signup success page
-router.get('/signup-success', (req, res) => {
-  res.send('Signup successful!');
-});
 
 
 

@@ -6,6 +6,6 @@ const user_controller = require("../controllers/userController");
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/cool', user_controller.user_list)
+router.get('/:id', user_controller.user_list)
 
 module.exports = router;
