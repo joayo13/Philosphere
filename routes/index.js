@@ -35,8 +35,8 @@ router.post('/signin', validateSignin, asyncHandler(async (req, res, next) => {
 }));
 
 // Define a route for the signin success page
-router.get('/library', (req, res) => {
-  res.send('Library');
+router.get('/story-form', (req, res) => {
+  res.render('story-form');
 });
 router.get('/signup', (req, res) => {
   res.render('signup');

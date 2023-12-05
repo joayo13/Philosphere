@@ -30,6 +30,7 @@ app.use(session({
 }));
 
 // Set up Passport.js middleware
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
