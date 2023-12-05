@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const storySchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    minLength: 2,
+    maxLength: 30
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -12,12 +14,31 @@ const storySchema = new mongoose.Schema({
   },
   releaseDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   },
   plotSummary: {
     type: String,
+    minLength: 20,
+    maxLength: 200,
     required: true
   },
+  story: {
+    minLength: 20,
+    maxLength: 100000,
+    type: String,
+    required: true
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 10,
+    required: true
+  },
+  ratingAmount: {
+    type: Number,
+    required: true
+  }
 });
 
 // Create a model based on the schema
