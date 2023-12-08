@@ -8,7 +8,7 @@ const User = require('../models/user'); // Assuming the path is correct
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', user: req.user });
 });
 router.get('/signin', (req, res) => {
   res.render('signin');
@@ -17,6 +17,11 @@ router.get('/signin', (req, res) => {
 const validateSignin = [
   body('username').trim().isLength({ min: 3 }).withMessage('Username must be at least 3 characters'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+];
+const validateSignup = [
+  body('username').trim().isLength({ min: 3 }).withMessage('Username must be at least 3 characters'),
+  body('email').trim().isEmail().withMessage('Invalid email address'),
+  body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
 ];
 
 // Handle signin form submission with async handler and validation
@@ -28,13 +33,12 @@ router.post('/signin', validateSignin, asyncHandler(async (req, res, next) => {
   }
 
   passport.authenticate('local', {
-    successRedirect: '/library',
+    successRedirect: `/`,
     failureRedirect: '/signin',
     failureFlash: true,
   })(req, res, next);
 }));
 
-// Define a route for the signin success page
 router.get('/story-form', (req, res) => {
   res.render('story-form');
 });
@@ -50,12 +54,6 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-// Handle signup form submission
-const validateSignup = [
-  body('username').trim().isLength({ min: 3 }).withMessage('Username must be at least 3 characters'),
-  body('email').trim().isEmail().withMessage('Invalid email address'),
-  body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
-];
 
 // Handle signup form submission with async handler and validation
 router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
