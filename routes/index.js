@@ -38,6 +38,14 @@ router.post('/signin', validateSignin, asyncHandler(async (req, res, next) => {
 router.get('/story-form', (req, res) => {
   res.render('story-form');
 });
+router.post('/story-form', (req, res) => {
+  if(req.isAuthenticated()) {
+    console.log(req.body.content)
+  }
+  else {
+    res.redirect('/')
+  }
+});
 router.get('/signup', (req, res) => {
   res.render('signup');
 });

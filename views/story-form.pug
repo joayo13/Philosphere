@@ -3,11 +3,9 @@ extends layout
 block content
     h1 Create a Story
 
-    form(action="/create-story" method="POST")
+    form(action="/story-form" method="POST")
       label(for="title") Title:
       input(type="text" id="title" name="title" required)
-
-      label(for="content") Content:
-      textarea(id="my-expressjs-tinymce-app" name="content" rows="10" cols="50" maxlength="100000" required)
+      textarea(id="my-expressjs-tinymce-app" name="content" rows="10" cols="50" maxlength="100000")
 
       input(type="submit" value="Create Story")
