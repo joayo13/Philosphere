@@ -5,7 +5,9 @@ const asyncHandler = require("express-async-handler");
 exports.user_get = asyncHandler(async (req, res, next) => {
   if (req.isAuthenticated()) {
     const user = await User.find({_id: req.user.id}).exec()
-    res.send(user)
+    res.render('user-page', {
+      username: user.username
+    })
   }
   else {
     res.redirect('/signin')

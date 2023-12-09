@@ -38,7 +38,7 @@ const storySchema = new mongoose.Schema({
   ratingAmount: {
     type: Number,
     required: true
-  }
+  }, 
 });
 
 // Create a model based on the schema
