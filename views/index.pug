@@ -5,7 +5,9 @@ block content
     h1(class='creepster red') Cursed Library
     p Welcome to the 
     p(class='creepster') Cursed Library. 
-    p Hello, #{user.username}
+    if user
+      p Logged in as: #{user.username}
+    
     a(href="/signin") Sign In
     h3 Here Are Our Most Cursed Stories. Proceed with Caution.
   section(class='stories-container')
