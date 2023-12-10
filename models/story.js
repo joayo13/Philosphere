@@ -17,12 +17,6 @@ const storySchema = new mongoose.Schema({
     default: Date.now,
     required: true
   },
-  plotSummary: {
-    type: String,
-    minLength: 20,
-    maxLength: 200,
-    required: true
-  },
   story: {
     minLength: 20,
     maxLength: 100000,
