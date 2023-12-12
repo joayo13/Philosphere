@@ -8,7 +8,7 @@ const User = require('../models/user'); // Assuming the path is correct
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', user: req.user });
+  res.render('index', { user: req.user });
 });
 router.get('/signin', (req, res) => {
   res.render('signin');

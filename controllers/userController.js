@@ -3,13 +3,15 @@ const asyncHandler = require("express-async-handler");
 
 // Display list of all Authors.
 exports.user_get = asyncHandler(async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    const user = await User.find({_id: req.user.id}).exec()
+  const userData = await User.find({_id: req.user.id}).exec();
+  if(userData) {
+    console.log(userData)
     res.render('user-page', {
-      username: user.username
+      username: userData[0].username
     })
   }
-  else {
-    res.redirect('/signin')
-  }
+    else {
+      const err = "fuck you"
+      return next(err)
+    }
 });
