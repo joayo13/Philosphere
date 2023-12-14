@@ -7,8 +7,9 @@ block content
     p(class='creepster') Cursed Library. 
     if user
       p Logged in as: #{user.username}
-    
-    a(href="/signin") Sign In
+      a(href=`/users/${user.id}`) My Profile
+    if !user
+      a(href="/signin") Sign In
     h3 Here Are Our Most Cursed Stories. Proceed with Caution.
   section(class='stories-container')
 
