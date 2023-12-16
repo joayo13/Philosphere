@@ -40,7 +40,12 @@ router.post('/signin', validateSignin, asyncHandler(async (req, res, next) => {
 }));
 
 router.get('/story-form', (req, res) => {
-  res.render('story-form');
+  if(req.isAuthenticated()) {
+    res.render('story-form');
+  }
+  else {
+    res.redirect('/signin')
+  }
 });
 router.post('/story-form', (req, res) => {
   if(req.isAuthenticated()) {
