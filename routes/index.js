@@ -47,13 +47,37 @@ router.get('/story-form', (req, res) => {
     res.redirect('/signin')
   }
 });
-router.post('/story-form', (req, res) => {
-  if(req.isAuthenticated()) {
-    console.log(req.body.content)
+const sanitizeAndValidate = [
+  body('title').trim().isLength({ min: 1 }).escape(),
+  body('author').trim().isLength({ min: 1 }).escape(),
+  body('releaseDate').toDate(),
+  body('rating').isNumeric().toFloat(),
+  body('ratingAmount').isInt().toInt(),
+];
+router.post('/story-form', sanitizeAndValidate, (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-  else {
-    res.redirect('/')
-  }
+
+  // Create a new post using the data from the request body
+  const newPost = new Post({
+    title: req.body.title,
+    author: req.user.username,
+    releaseDate: Date.now(),
+    story: req.body.content,
+    rating: undefined,
+    ratingAmount: undefined,
+  });
+
+  // Save the new post to the database
+  newPost.save((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error saving post to the database.' });
+    }
+    res.status(201).json({ message: 'Post created successfully' });
+  });
 });
 router.get('/signup', (req, res) => {
   res.render('signup');
