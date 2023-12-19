@@ -24,7 +24,7 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(session({
-  secret: process.env.SESSION_SECRET, // Change this to a more secure secret
+  secret: process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: false,
 }));

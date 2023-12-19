@@ -18,21 +18,24 @@ const storySchema = new mongoose.Schema({
     required: true
   },
   story: {
-    minLength: 20,
+    minLength: 1,
     maxLength: 100000,
     type: String,
     required: true
   },
-  rating: {
-    type: Number,
-    min: 1,
-    max: 10,
-    required: true
-  },
-  ratingAmount: {
-    type: Number,
-    required: true
-  }, 
+  ratings: [
+    {
+      rating: {
+        type: Number,
+        required: true,
+      },
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+      },
+    },
+  ],
 });
 
 // Create a model based on the schema

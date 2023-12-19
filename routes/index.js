@@ -4,6 +4,10 @@ const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 const passport = require('../passport-config'); // Adjust the path as needed
 const User = require('../models/user'); // Assuming the path is correct
+const Story = require('../models/story');
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
+
 
 
 /* GET home page. */
@@ -49,36 +53,30 @@ router.get('/story-form', (req, res) => {
 });
 const sanitizeAndValidate = [
   body('title').trim().isLength({ min: 1 }).escape(),
-  body('author').trim().isLength({ min: 1 }).escape(),
-  body('releaseDate').toDate(),
-  body('rating').isNumeric().toFloat(),
-  body('ratingAmount').isInt().toInt(),
 ];
-router.post('/story-form', sanitizeAndValidate, (req, res) => {
-  // Check for validation errors
+router.post('/story-form', sanitizeAndValidate, async (req, res) => {
+  console.log(req.user)
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
   // Create a new post using the data from the request body
-  const newPost = new Post({
+  const newStory = new Story({
     title: req.body.title,
-    author: req.user.username,
+    author: new mongoose.Types.ObjectId(req.user.id),
     releaseDate: Date.now(),
     story: req.body.content,
-    rating: undefined,
-    ratingAmount: undefined,
+    ratings: [{
+      rating: 10,
+      userId: new mongoose.Types.ObjectId(req.user.id),
+      }]
   });
 
   // Save the new post to the database
-  newPost.save((err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error saving post to the database.' });
-    }
-    res.status(201).json({ message: 'Post created successfully' });
-  });
-});
+  newStory.save();
+
+})
 router.get('/signup', (req, res) => {
   res.render('signup');
 });

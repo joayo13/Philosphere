@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 exports.user_get = asyncHandler(async (req, res, next) => {
   const userData = await User.findOne({_id: req.params.id}).exec();
   if(userData) {
-    console.log(userData)
+    console.log(req.user)
     res.render('user-page', {
       username: userData.username
     })
