@@ -20,7 +20,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  background-color: rgb(20, 20, 20);
+  background-color: #222f3e;
 }
 .text-xl {
   font-size: 1.25rem; /* 20px */
@@ -42,7 +42,6 @@ a {
 }
 .intro-container {
   padding-top: 50px;
-  background-color: rgb(20, 20, 20);
   max-width: 70vw;
   text-align: center;
   min-width: fit-content;
