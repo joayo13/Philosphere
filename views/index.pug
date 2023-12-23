@@ -3,14 +3,13 @@ extends layout
 block content
   div(class='intro-container text-xl')
     h1(class='creepster red') Cursed Library
-    p Welcome to the 
-    p(class='creepster') Cursed Library. 
     if user
-      p Logged in as: #{user.username}
+      p Logged in as: 
+        strong(class='red') #{user.username}
       a(href=`/users/${user.id}`) My Profile
     if !user
       a(href="/signin") Sign In
-    h3 Here Are Our Most Cursed Stories. Proceed with Caution.
+    h3 An Archive Of The Most Cursed Stories.
   section(class='stories-container')
 
     
