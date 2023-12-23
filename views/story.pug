@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  div(class='intro-container')
+    h1(class='creepster red') #{story.title}
+    a #{story.author}
+    p!= story.content
