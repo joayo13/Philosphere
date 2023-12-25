@@ -5,5 +5,5 @@ block content
     p Logged in as #{username}
     h2 My Stories
     for item in storyData
-        h2 #{item.title}
-        p!= item.story
+      a(href=`/story/${item.id}`) #{item.title}
+       

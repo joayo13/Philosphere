@@ -10,6 +10,7 @@ const storySchema = new mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
     required: true
   },
   releaseDate: {

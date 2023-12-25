@@ -110,6 +110,11 @@ router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
     res.status(500).send('Error creating user');
   }
 }));
+  router.get('/story/:id', asyncHandler( async (req, res) => {
+    const storyData = await Story.findById(req.params.id).populate("author").exec()
+    res.send(storyData)
+
+  }))
 
 
 
