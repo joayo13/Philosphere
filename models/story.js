@@ -28,6 +28,8 @@ const storySchema = new mongoose.Schema({
     {
       rating: {
         type: Number,
+        max: 1,
+        min: 0,
         required: true,
       },
       userId: {

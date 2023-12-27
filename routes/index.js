@@ -68,7 +68,7 @@ router.post('/story-form', sanitizeAndValidate, async (req, res) => {
     releaseDate: Date.now(),
     story: req.body.content,
     ratings: [{
-      rating: 10,
+      rating: 1,
       userId: new mongoose.Types.ObjectId(req.user.id),
       }]
   });
@@ -112,10 +112,42 @@ router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
 }));
   router.get('/story/:id', asyncHandler( async (req, res) => {
     const storyData = await Story.findById(req.params.id).populate("author").exec()
+    const positiveReviews = storyData.ratings.filter((rating) => rating.rating === 1).length
+    const negativeReviews  = storyData.ratings.filter((rating) => rating.rating === 0).length
+    const totalReviews = positiveReviews + negativeReviews
+    const totalRating =  Math.floor(100 / totalReviews * positiveReviews)
     res.render('story', {
-      story: storyData
+      story: storyData,
+      totalRating: totalRating,
+      totalReviews: totalReviews
     })
 
+  }))
+
+  router.post('/story/:id', asyncHandler( async (req, res, next) => {
+    if(req.isAuthenticated) {
+      const storyData = await Story.findById(req.params.id).exec()
+      if(req.body.upvote === '') {
+        if(storyData.ratings.includes(storyData.ratings.userId === req.user.id)) {
+          return err('fuk u')
+        }
+        storyData.ratings.push({
+          rating: 1,
+          userId: req.user._id
+        })
+      await storyData.save()
+      }
+      if(req.body.downvote === '') {
+        storyData.ratings.push({
+          rating: 0,
+          userId: req.user.id
+        })
+      await storyData.save()
+      
+      }
+
+    }
+    res.redirect(`/story/${req.params.id}`)
   }))
 
 

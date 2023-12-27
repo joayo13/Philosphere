@@ -5,3 +5,8 @@ block content
     h1(class='creepster red') #{story.title}
     a(href=`/users/${story.author.id}`) #{story.author.username}
     p!= story.story
+    p rating: #{totalRating}% (#{totalReviews})
+    form(action='' method='POST')
+      button(name='upvote' id='upvote') upvote 
+    form(action='' method='POST')
+      button(name='downvote' id='downvote') downvote
