@@ -6,7 +6,7 @@ const passport = require('../passport-config'); // Adjust the path as needed
 const User = require('../models/user'); // Assuming the path is correct
 const Story = require('../models/story');
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+const { Schema, model, addToSet } = mongoose;
 
 
 
@@ -126,23 +126,20 @@ router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
 
   router.post('/story/:id', asyncHandler( async (req, res, next) => {
     if(req.isAuthenticated) {
-      const storyData = await Story.findById(req.params.id).exec()
+      
       if(req.body.upvote === '') {
-        if(storyData.ratings.includes(storyData.ratings.userId === req.user.id)) {
-          return err('fuk u')
-        }
-        storyData.ratings.push({
+        const storyDataNew = {
           rating: 1,
           userId: req.user._id
-        })
-      await storyData.save()
+        }
+        const storyData = await Story.findOneAndUpdate({_id: req.params.id}, {$addToSet: {ratings: storyDataNew}})
       }
       if(req.body.downvote === '') {
-        storyData.ratings.push({
+        const storyDataNew = {
           rating: 0,
           userId: req.user.id
-        })
-      await storyData.save()
+        }
+        const storyData = await Story.findOneAndUpdate({_id: req.params.id}, {$addToSet: {ratings: storyDataNew}})
       
       }
 
