@@ -130,7 +130,7 @@ router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
       if(req.body.upvote === '') {
         const storyDataNew = {
           rating: 1,
-          userId: req.user._id
+          userId: req.user.id
         }
         const storyData = await Story.findOneAndUpdate({_id: req.params.id}, {$addToSet: {ratings: storyDataNew}})
       }

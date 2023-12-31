@@ -10,6 +10,7 @@ exports.user_get = asyncHandler(async (req, res, next) => {
     console.log(req.user)
     res.render('user-page', {
       username: userData.username,
+      user: req.user,
       storyData: userStoryData
     })
   }
