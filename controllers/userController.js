@@ -2,7 +2,6 @@ const Story = require("../models/story");
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 
-// Display list of all Authors.
 exports.user_get = asyncHandler(async (req, res, next) => {
   const userData = await User.findOne({_id: req.params.id}).exec();
   const userStoryData = await Story.find({author: req.params.id}).exec()
@@ -15,7 +14,7 @@ exports.user_get = asyncHandler(async (req, res, next) => {
     })
   }
     else {
-      const err = "fuck you"
+      const err = "Could not find user data"
       return next(err)
     }
 });
