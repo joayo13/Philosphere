@@ -2,11 +2,12 @@ extends layout
 
 block content
     h2 User Page
-    if user.username = username
+    if (user.username === username)
       p Logged in as #{username}
     else 
       p #{username}
-    h2 My Stories
-    for item in storyData
-      a(href=`/story/${item.id}`) #{item.title}
-       
+    h2 Stories
+    ul
+      for item in storyData
+        li
+          a(href=`/story/${item.id}`) #{item.title}
