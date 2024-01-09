@@ -9,6 +9,7 @@ require('dotenv').config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var storysRouter = require('./routes/storys')
 
 var app = express();
 const mongoose = require("mongoose");
@@ -42,6 +43,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/story', storysRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

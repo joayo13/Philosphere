@@ -43,40 +43,6 @@ router.post('/signin', validateSignin, asyncHandler(async (req, res, next) => {
   })(req, res, next);
 }));
 
-router.get('/story-form', (req, res) => {
-  if(req.isAuthenticated()) {
-    res.render('story-form');
-  }
-  else {
-    res.redirect('/signin')
-  }
-});
-const sanitizeAndValidate = [
-  body('title').trim().isLength({ min: 1 }).escape(),
-];
-router.post('/story-form', sanitizeAndValidate, async (req, res) => {
-  console.log(req.user)
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  // Create a new post using the data from the request body
-  const newStory = new Story({
-    title: req.body.title,
-    author: new mongoose.Types.ObjectId(req.user.id),
-    releaseDate: Date.now(),
-    story: req.body.content,
-    ratings: [{
-      rating: 1,
-      userId: new mongoose.Types.ObjectId(req.user.id),
-      }]
-  });
-
-  // Save the new post to the database
-  newStory.save();
-
-})
 router.get('/signup', (req, res) => {
   res.render('signup');
 });
@@ -110,42 +76,6 @@ router.post('/signup', validateSignup, asyncHandler(async (req, res) => {
     res.status(500).send('Error creating user');
   }
 }));
-  router.get('/story/:id', asyncHandler( async (req, res) => {
-    const storyData = await Story.findById(req.params.id).populate("author").exec()
-    const positiveReviews = storyData.ratings.filter((rating) => rating.rating === 1).length
-    const negativeReviews  = storyData.ratings.filter((rating) => rating.rating === 0).length
-    const totalReviews = positiveReviews + negativeReviews
-    const totalRating =  Math.floor(100 / totalReviews * positiveReviews)
-    res.render('story', {
-      story: storyData,
-      totalRating: totalRating,
-      totalReviews: totalReviews
-    })
-
-  }))
-
-  router.post('/story/:id', asyncHandler( async (req, res, next) => {
-    if(req.isAuthenticated) {
-      
-      if(req.body.upvote === '') {
-        const storyDataNew = {
-          rating: 1,
-          userId: req.user.id
-        }
-        const storyData = await Story.findOneAndUpdate({_id: req.params.id}, {$addToSet: {ratings: storyDataNew}})
-      }
-      if(req.body.downvote === '') {
-        const storyDataNew = {
-          rating: 0,
-          userId: req.user.id
-        }
-        const storyData = await Story.findOneAndUpdate({_id: req.params.id}, {$addToSet: {ratings: storyDataNew}})
-      
-      }
-
-    }
-    res.redirect(`/story/${req.params.id}`)
-  }))
 
 
 
