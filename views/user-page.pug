@@ -1,13 +1,14 @@
 extends layout
 
 block content
-    h2 User Page
-    if (user.username === username)
-      p Logged in as #{username}
-    else 
-      p #{username}
-    h2 Stories
-    ul
-      for item in storyData
-        li
-          a(href=`/story/${item.id}`) #{item.title}
+    div(class='user-page')
+      h2 User Page
+      if (user.username === username)
+        p Logged in as #{username}
+      else 
+        p #{username}
+      h2 Stories
+      ul
+        for item in storyData
+          li
+            a(href=`/story/${item.id}`) #{item.title}

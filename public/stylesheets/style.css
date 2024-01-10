@@ -1,5 +1,5 @@
 body, html {
-  background-color: black;
+  background-color: rgb(13, 13, 13);
   color: rgb(218, 218, 218);
   margin: 0;
   padding: 0;
@@ -7,32 +7,26 @@ body, html {
 }
 input {
   background-color: inherit;
-  border-color: red;
-  color: red;
+  border-color: white;
 }
 a {
-  color: red;
+  color: darkorange
 }
+
 .top-nav {
-  color: red;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  font-size: 16px;
+  padding: 2rem;
   background-color: #222f3e;
-}
-.text-xl {
-  font-size: 1.25rem; /* 20px */
-  line-height: 1.75rem; /* 28px */
 }
 .creepster {
   font-family: 'Creepster', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.red {
-  color: red;
-}
 .nav-link {
-  font-size: 22px;
+  font-size: 16px;
 }
 .sign-in, .sign-up {
   width: min-content;
@@ -47,4 +41,30 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
-
+.story-form {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.story-form-title {
+  color: rgb(218, 218, 218);
+  width: fit-content;
+}
+.button-fit {
+  width: fit-content;
+  color: rgb(218, 218, 218);
+}
+.account-form {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.user-page {
+  padding: 2rem;
+}

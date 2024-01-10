@@ -2,10 +2,10 @@ extends layout
 
 block content
   div(class='intro-container text-xl')
-    h1(class='creepster red') Cursed Library
+    h1(class='creepster') Cursed Library
     if user
       p Logged in as: 
-        strong(class='red') #{user.username}
+        strong #{user.username}
       a(href=`/users/${user.id}`) My Profile
     if !user
       a(href="/signin") Sign In
