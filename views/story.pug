@@ -7,6 +7,6 @@ block content
     p!= story.story
     p rating: #{totalRating}% (#{totalReviews})
     form(action='' method='POST')
-      button(name='upvote' id='upvote') Like
+      button(name='upvote' id='upvote' class='button-fit') Like
     form(action='' method='POST')
-      button(name='downvote' id='downvote') Dislike
+      button(name='downvote' id='downvote' class='button-fit') Dislike
