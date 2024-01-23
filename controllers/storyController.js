@@ -35,7 +35,7 @@ exports.storyform_get = (req, res) => {
   
     // Save the new post to the database
     newStory.save();
-  
+    res.redirect(`/story/${newStory.id}`)
   }]
 
   exports.story_get = asyncHandler( async (req, res) => {

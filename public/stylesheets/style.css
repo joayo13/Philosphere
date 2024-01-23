@@ -44,6 +44,9 @@ a {
 .arial {
   font-family: Arial, Helvetica, sans-serif;
 }
+.times {
+  font-family: 'Times New Roman', Times, serif;
+}
 .story-form {
   margin-left: auto;
   margin-right: auto;

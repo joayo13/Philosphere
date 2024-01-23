@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div(class='intro-container')
+  div(class='intro-container times')
     h1(class='creepster red') #{story.title}
     a(href=`/users/${story.author.id}`) #{story.author.username}
     p!= story.story
