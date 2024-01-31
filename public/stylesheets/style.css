@@ -7,7 +7,7 @@ body, html {
 }
 input {
   background-color: inherit;
-  border-color: white;
+  border-color: darkorange;
 }
 a {
   color: darkorange
@@ -63,6 +63,50 @@ a {
   width: fit-content;
   color: rgb(218, 218, 218);
   background-color: inherit;
+}
+.button-rounded {
+  transition: all;
+  transition-duration: 200ms;
+  background-color: black;
+  color: darkorange;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  text-decoration: none;
+}
+.button-rounded:hover {
+  background-color: darkorange;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  text-decoration: none;
+  color: #222f3e;
+}
+.button-rounded-invert {
+  transition: all;
+  transition-duration: 200ms;
+  background-color: darkorange;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  text-decoration: none;
+  color: #222f3e;
+}
+.button-rounded-invert:hover {
+  background-color: black;
+  border-radius: 10px;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  text-decoration: none;
+  color: darkorange;
 }
 .account-form {
   margin-left: auto;
