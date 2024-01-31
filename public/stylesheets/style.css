@@ -15,7 +15,7 @@ a {
 
 .top-nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
   font-size: 16px;
@@ -122,4 +122,8 @@ a {
 .mt1 {
   display: block;
   margin-top: 1rem;
+}
+.flex-gap-1 {
+  display: flex;
+  gap: 1rem;
 }

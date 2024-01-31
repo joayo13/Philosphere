@@ -13,7 +13,8 @@ html
   body
     nav(class='top-nav')
      a(href='/' class='nav-link creepster') TCL
-     a(href='/signin' class='nav-link button-rounded') Sign In
-     a(href='/signup' class='nav-link button-rounded') Sign Up
-     a(href='/story/story-form' class='nav-link button-rounded-invert') New Story
+     div(class='flex-gap-1')
+      a(href='/signin' class='nav-link button-rounded') Sign In
+      a(href='/signup' class='nav-link button-rounded') Sign Up
+      a(href='/story/story-form' class='nav-link button-rounded-invert') New Story
     block content
